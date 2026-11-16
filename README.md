@@ -10,8 +10,8 @@ laptop  ~/Documents/XournalNotes   <-- git -->  GitHub  <-- git -->  phone
                                                                      /sdcard/Documents/XournalNotes
 ```
 
-* **Laptop**: a systemd user timer runs `notes-sync` every 5 minutes (pull,
-  export PDFs of changed notebooks, commit, push), or run `notes-sync` /
+* **Laptop**: a systemd user timer runs `notes-sync` every 5 minutes (dedupe
+  `Name (N)` Save-As copies, pull, commit, push), or run `notes-sync` /
   `notes-open` by hand. The laptop pull is skipped while a notebook changed in
   the last 2 minutes, so an open note is never rewritten.
 * **Phone**: Xournal++ Mobile in *Local storage* mode points at
@@ -21,9 +21,11 @@ laptop  ~/Documents/XournalNotes   <-- git -->  GitHub  <-- git -->  phone
 
 ## PDF copies
 
-Every sync on the laptop exports a PDF for each notebook that changed, into
-`pdf/` next to the notebook. Xournal++ is not available on Android, so the
-phone uploads `.xopp` only and the laptop fills in the PDFs.
+The phone exports a PDF for each changed notebook after every sync (it runs a
+Debian xournalpp via proot-distro, losslessly repairing the 1-point pen strokes
+the mobile app writes, because desktop parsers require >=4 point values per
+stroke). Xournal++ has no Android build. PDFs committed here are generated on
+the phone, not on the laptop.
 
 ## Conflict policy
 
