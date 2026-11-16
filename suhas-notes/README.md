@@ -130,7 +130,8 @@ handwriting) were converted by a custom parser
 PDF path → an Xournal++ pen stroke with the same colour, width and
 points; the light-blue grid → a separate `grid` layer; the full-page
 white fill → the background; the OneNote page-title/timestamp → a text
-element. Bookkeeping:
+element. Files are written as gzipped XML exactly like Xournal++ writes
+(the Android app refuses plain-XML `.xopp`). Bookkeeping:
 
 | File | PDF pages | XOPP pages | ink strokes (approx.) | blank pages dropped |
 |---|---|---|---|---|
