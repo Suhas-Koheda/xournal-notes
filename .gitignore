@@ -1,0 +1,14 @@
+# Xournal++ working files - never commit these
+*.xopp~
+*.xopp.autosave
+*.autosave.xopp
+*.xopp.bak
+~$*
+*.swp
+
+# OS noise
+.DS_Store
+desktop.ini
+
+# Generated PDFs that are only exports of a notebook
+export/
