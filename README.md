@@ -10,12 +10,13 @@ laptop  ~/Documents/XournalNotes   <-- git -->  GitHub  <-- git -->  phone
                                                                      /sdcard/Documents/XournalNotes
 ```
 
-* **Laptop**: `notes-open` pulls, launches Xournal++, and pushes when you close
-  it. `notes-sync` does the same by hand. `notes-sync status` shows what is
-  where.
+* **Laptop**: a systemd user timer runs `notes-sync` every 5 minutes (pull,
+  export PDFs of changed notebooks, commit, push), or run `notes-sync` /
+  `notes-open` by hand. The laptop pull is skipped while a notebook changed in
+  the last 2 minutes, so an open note is never rewritten.
 * **Phone**: Xournal++ Mobile in *Local storage* mode points at
   `/sdcard/Documents/XournalNotes`. Termux runs `~/bin/notes-sync.sh` from
-  cron (via `crond`) every 15 minutes, which pulls and pushes with real git.
+  cron (via `crond`) every 5 minutes, which pulls and pushes with real git.
   No laptop or USB connection is involved.
 
 ## PDF copies
@@ -57,7 +58,7 @@ corrupting one. Keep it in `~/bin`.
 
 ```sh
 pkg install git cronie termux-services
-crontab -l            # */15 * * * * $HOME/bin/notes-sync.sh
+crontab -l            # */5 * * * * $HOME/bin/notes-sync.sh
 sv-enable crond
 termux-wake-lock
 ```
